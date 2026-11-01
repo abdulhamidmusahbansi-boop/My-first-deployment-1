@@ -1,12 +1,228 @@
-<!DOCTYPE html>
-<html>
+[01/11/2026 2:49 pm] Ing.General: <!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>My First Deployment</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FunStore | Welcome</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f5ed;
+      color: #203027;
+    }
+
+    header {
+      padding: 20px 8%;
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo { font-size: 25px; font-weight: bold; }
+    .logo span { color: #77a63c; }
+
+    main {
+      max-width: 1050px;
+      margin: 55px auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 45px;
+      align-items: center;
+    }
+
+    h1 { font-size: 48px; margin-bottom: 15px; }
+    h1 span { color: #77a63c; }
+
+    .intro { color: #657268; line-height: 1.7; }
+
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 18px;
+      box-shadow: 0 10px 35px #20302710;
+    }
+
+    .tabs { display: flex; gap: 10px; margin-bottom: 25px; }
+
+    .tabs button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #edf0e8;
+      font-weight: bold;
+    }
+
+    .tabs button.active { background: #c9ed91; }
+
+    label { display: block; margin: 15px 0 7px; font-weight: bold; }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d8ded4;
+      border-radius: 8px;
+    }
+
+    .submit {
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px;
+      background: #c9ed91;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .message { font-size: 14px; line-height: 1.5; }
+
+    .products {
+      max-width: 1050px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .product {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .emoji { font-size: 48px; }
+    .price { color: #507d2c; font-weight: bold; }
+    footer { text-align: center; padding: 25px; color: #657268; }
+
+    @media (max-width: 750px) {
+      main { grid-template-columns: 1fr; margin: 20px auto; }
+      h1 { font-size: 38px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-<body style="background:#111c2e; color:white;
-  font-family:Arial; text-align:center;">
-  <h1>🚀 My First Deployment</h1>
-  <p>Built by: <b>Abdul Hamid Musah</b></p>
-  <p>Ace Global Academy · DevOps Intro</p>
+<body>
+  <header>
+    <div class="logo">Fun<span>Store.</span></div>
+    <div>Discover something new ✨</div>
+  </header>
+
+  <main>
+    <section>
+      <p>WELCOME TO YOUR NEXT FAVOURITE STORE</p>
+      <h1>Find your next<br><span>favourite thing.</span></h1>
+      <p class="intro">
+        Explore cool gadgets, everyday essentials and exciting finds.
+        Create an account to enter the store.
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="tabs">
+        <button id="loginTab" class="active" type="button"
+          onclick="setMode('login')">Log in</button>
+        <button id="signupTab" type="button"
+          onclick="setMode('signup')">Sign up</button>
+      </div>
+
+      <h2 id="formTitle">Welcome back</h2>
+      <p id="formDescription">Log in to explore the store.</p>
+
+      <form id="authForm">
+        <label for="email">Email address</label>
+        <input id="email" type="email" placeholder="you@example.com" required>
+
+        <label for="password">Password</label>
+        <input id="password" type="password"
+          placeholder="At least 6 characters" minlength="6" required>
+
+        <div id="confirmArea" hidden>
+          <label for="confirmPassword">Confirm password</label>
+          <input id="confirmPassword" type="password" minlength="6">
+        </div>
+
+        <button class="submit" id="submitButton" type="submit">Log in</button>
+      </form>
+
+      <p id="message" class="message" role="status"></p>
+    </section>
+  </main>
+[01/11/2026 2:49 pm] Ing.General: <section class="products">
+    <h2>A few things you might love</h2>
+    <div class="grid">
+      <article class="product">
+        <div class="emoji">🎧</div>
+        <h3>Wave Headphones</h3>
+        <p class="price">GH₵ 180</p>
+      </article>
+      <article class="product">
+        <div class="emoji">🎒</div>
+        <h3>Everyday Backpack</h3>
+        <p class="price">GH₵ 240</p>
+      </article>
+      <article class="product">
+        <div class="emoji">⌚</div>
+        <h3>Pulse Watch</h3>
+        <p class="price">GH₵ 320</p>
+      </article>
+    </div>
+  </section>
+
+  <footer>FunStore · A web development learning project</footer>
+
+  <script>
+    let mode = "login";
+
+    function setMode(newMode) {
+      mode = newMode;
+      const signup = mode === "signup";
+
+      document.getElementById("loginTab").classList.toggle("active", !signup);
+      document.getElementById("signupTab").classList.toggle("active", signup);
+      document.getElementById("confirmArea").hidden = !signup;
+      document.getElementById("confirmPassword").required = signup;
+      document.getElementById("formTitle").textContent =
+        signup ? "Create your account" : "Welcome back";
+      document.getElementById("formDescription").textContent =
+        signup ? "Join FunStore today." : "Log in to explore the store.";
+      document.getElementById("submitButton").textContent =
+        signup ? "Create account" : "Log in";
+      document.getElementById("message").textContent = "";
+    }
+
+    document.getElementById("authForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const message = document.getElementById("message");
+
+      if (mode === "signup") {
+        const password = document.getElementById("password").value;
+        const confirm = document.getElementById("confirmPassword").value;
+
+        if (password !== confirm) {
+          message.textContent = "Your passwords do not match.";
+          return;
+        }
+
+        message.textContent =
+          "The form works! Real account creation will be connected in our next step.";
+      } else {
+        message.textContent =
+          "The login form works! We will connect secure authentication next.";
+      }
+    });
+  </script>
 </body>
 </html>
